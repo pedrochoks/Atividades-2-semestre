@@ -1,67 +1,14 @@
--- Apagar base de dados ja existente
-DROP DATABASE Empresa;
+use Clinica_Medica
+--left join
+select c.dataConsulta, m.NomeMedico, p.Nome as 'Nome Paciente'
+From Paciente p
+left join Consulta c On p.CPF = c.CPF_Paciente
+left join Medico m ON c.CRM_Medico = m.CRM
 
---Criar base de dados Empresa
-CREATE DATABASE Empresa;
-
---Acessar a base de dados criada
-USE Empresa;
-
---Cria tabela Funcionario
-CREATE TABLE Funcionario(
-	Codigo int primary key,
-	Nome NVARCHAR(100)
-);
-
---Inserindo valores em uma tabela
-insert into Funcionario (Codigo, Nome)
-values
-(1, 'Kessia'),
-(2, 'Thiago')
-
--- Outro metodo
-insert into Funcionario values
-(3, 'Odirlei')
-
---Listar dados inseridos
-select * from Funcionario;
-
--- Listar nomes de funcionarios
-select Nome, Codigo FROM Funcionario;
-
--- Listar funcionarios com cod > 2
-select * from Funcionario
-where Codigo > 2;
-
--- Listar funcionarios que comecam com a letra T
-select * from Funcionario
-where Nome like 'T%';
-
--- Listar funcionarios que terminam com a letra A
-select * from Funcionario
-where Nome like '%a';
-
--- Ordenar valores decrescente
-select * from Funcionario
-order by Codigo desc
-
--- Ordenar por letra ( Ordem alfabetica)
-select * from Funcionario
-order by Nome asc
-
--- Desc = decrescente 
--- Asc = Crescente
-
--- Atualizacao de registro
-update Funcionario set Nome = 'Kessia Milena'
-where Nome = 'Kessia'
-
-select * from Funcionario
-
--- Atualizacao sem update ( nao fazer)
--- Sem where muda TODOS os dados
-update Funcionario set Nome = 'Thiago'
-
--- exclusao de dados
-delete from Funcionario
-where Codigo = 3;
+--right join
+select m.NomeMedico, m.Especialidade, c.DataConsulta, p.Nome
+Fromm (Consulta c right join Medico m On c.CRM_Medico = m.CRM)
+--right join Paciente p On c.CPF_Paciente = p.CPF
+select = m.NomeMedico, m.Especialidade, c.DataConsulta --, p.Nome
+from (Consulta c right join Medico m ON c.CRM_Medico = m.CRM)
+-- right join Paciente p ON c.CPF_Paciete = p.CPF
